@@ -13,11 +13,9 @@ const Dashboard = () => {
   // Gemini setup
 
 
-const genAI = new GoogleGenerativeAI("AIzaSyCDH7EiiwvlrDTX7h19AO1TZ0bxOvHFd4A");
 
-const model = genAI.getGenerativeModel({
-  model: "models/gemini-pro",   // ✅ this is correct for v0.24.1
-});
+  const genAI = new GoogleGenerativeAI("AIzaSyCDH7EiiwvlrDTX7h19AO1TZ0bxOvHFd4A");
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 
   // Load profile from localStorage
@@ -178,16 +176,7 @@ const model = genAI.getGenerativeModel({
       <AutoResourceCurator userProfile={profile} isActive={!!profile} />
 
       {/* Get Recommendations */}
-      <div className="my-6">
-        <button
-          onClick={getRecommendations}
-          disabled={!profile || isLoading}
-          className="px-6 py-2 bg-green-600 text-white rounded"
-        >
-          {isLoading ? "Getting AI Tips..." : "Get AI Tips"}
-        </button>
-        {error && <p className="text-red-600 mt-2">{error}</p>}
-      </div>
+
 
       {/* Recommendations */}
       <RecommendationSection />
