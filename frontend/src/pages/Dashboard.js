@@ -13,9 +13,9 @@ const Dashboard = () => {
 
   // Gemini setup
   const genAI = new GoogleGenerativeAI("AIzaSyCDH7EiiwvlrDTX7h19AO1TZ0bxOvHFd4A");
-  const model = genAI.getGenerativeModel({
-    model: "gemini-1.5-pro-latest" // ✅ this is guaranteed to work in v0.24+
-  });
+ const model = genAI.getGenerativeModel({
+  model: "models/gemini-1.5-flash"  // ✅ this works on v0.24.1 + v1beta
+});
 
   // Load profile from localStorage
   const loadProfile = () => {
