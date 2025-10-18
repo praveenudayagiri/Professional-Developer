@@ -13,7 +13,9 @@ const Dashboard = () => {
 
   // Gemini setup
   const genAI = new GoogleGenerativeAI("AIzaSyCDH7EiiwvlrDTX7h19AO1TZ0bxOvHFd4A");
-  const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+  const model = genAI.getGenerativeModel({
+  model: "models/gemini-pro"   // ✅ THIS ONE WORKS
+});
 
   // Load profile from localStorage
   const loadProfile = () => {
