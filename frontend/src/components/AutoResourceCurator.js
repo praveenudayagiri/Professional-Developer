@@ -7,7 +7,7 @@ const AutoResourceCurator = ({ userProfile, isActive = true }) => {
   const [autoMode, setAutoMode] = useState(true);
   const [lastUpdate, setLastUpdate] = useState(null);
 
-  // Helpers
+  
   const getProfileSubject = () => {
     if (!userProfile) return 'Education';
     if (userProfile.subject === 'Other') {
@@ -15,6 +15,23 @@ const AutoResourceCurator = ({ userProfile, isActive = true }) => {
     }
     return userProfile.subject || 'Education';
   };
+
+  //BACKEND CALL TO GET RESOURCES
+    try {
+     const res= fetch("https://my-backend-api.com/resources", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        subject: getProfileSubject(),
+        gradeLevel: getProfileGradeLevel()
+      })
+      
+    });
+    console.log(res);
+  } catch (error) {
+    console.log("Backend temporarily unavailable, using local fallback.");
+  }
+
 
   const getProfileGradeLevel = () => {
     if (!userProfile) return 'K-12';
@@ -25,7 +42,7 @@ const AutoResourceCurator = ({ userProfile, isActive = true }) => {
   const randomInt = (min, max) =>
     Math.floor(Math.random() * (max - min + 1)) + min;
 
-  // Fake data pools
+  
   const providers = [
     'Coursera',
     'edX',
