@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import ResourceCard from "../components/ResourceCard";
 import AutoResourceCurator from "../components/AutoResourceCurator";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from "@google/generative-ai";
 
 const Dashboard = () => {
   const [profile, setProfile] = useState(null);
@@ -12,9 +12,12 @@ const Dashboard = () => {
   const location = useLocation();
 
   // Gemini setup
-  const genAI = new GoogleGenerativeAI("AIzaSyCDH7EiiwvlrDTX7h19AO1TZ0bxOvHFd4A");
- const model = genAI.getGenerativeModel({
-  model: "models/gemini-1.5-flash"  // ✅ this works on v0.24.1 + v1beta
+  
+const genAI = new GoogleGenerativeAI("AIzaSyCDH7EiiwvlrDTX7h19AO1TZ0bxOvHFd4A", {
+  apiVersion: "v1" // ✅ force correct version instead of v1beta
+});
+const model = genAI.getGenerativeModel({
+  model: "gemini-1.5-pro"
 });
 
   // Load profile from localStorage
